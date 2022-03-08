@@ -3,7 +3,29 @@ const quiz = document.getElementById('quiz');
 const submit = document.getElementById('submit');
 const results = document.getElementById('results');
 
-// Quiz questions
+/* header */
+
+// Create #quiz Header
+    // Create 'Highscores' link
+    // Create Timer, Countdown on 'onclick'
+
+/* #quiz */
+
+// Create #quiz title
+// Create #quiz Paragraph
+// #quiz startButton, starts timer and quiz appears
+function startQuiz () {
+    // When startButton is pressed, Quiz appears and timer begins
+}
+
+// Questionnare 
+
+// Create #question  2nd header.
+// Create Multi Choice Buttons [A, B, C, & D]
+    // Button = True, show 'Correct!', points++, next
+    // Button = False, show 'Wrong!', timer--
+
+// Quiz questions, remins hidden until 'onclick'
 const questions = [
     {
         // See README for cited sources
@@ -108,23 +130,31 @@ const questions = [
     }
 ]
 
-/* 
+// Gamne Over!
 
-** Understand how this works prior to moving forward with this function. **
+// Create #gameOver 2nd Header
+// Final Score
+// Capture initials on input
 
-// // Displays the quiz
-function codeQuiz () {
-    // When start button is clicked, quiz activates.   
-} */
+/* #submit */
 
+// Create Submit Button, Records UI info and show results 'onclick'
+// Activating the submit button displays the results of the quiz.
+submit.addEventListener('click', displayResults);
+
+/* #results */
+// Create #results 2nd Header 'Highscores'
 // Displays the results
 function displayResults () {
     // when submit button is clicked, results populate.
+    // if newGame, then saveResults
 }
+
+// Create tryAgain button, restarts the quiz, timer and score counter
+
+
+/* Functions */
 
 // Executable functions live here
 codeQuiz();
 displayResults();
-
-// Activating the submit button displays the results of the quiz.
-submit.addEventListener('click', displayResults);
