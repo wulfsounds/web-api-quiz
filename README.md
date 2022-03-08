@@ -14,13 +14,19 @@ This quiz will have the following functionality:
   * Once User saves information, a highscore screen appears displaying User's game score and initials.
 
 ## HTML Updates
+* Added HTML boiler plate and created div.id containers to house variables.
 
 ## CSS Updates
 
 ## JavaScript Updates
+* Created boiler plate that will contain a majority of code.
+* Added multiple choice questions.
 
 ## Troubleshooting
 
 ## ScreenShots
 
 ## Links
+
+## Sources
+Questions are sourced or inspired from [W3Schools](https://www.w3schools.com/quiztest/quiztest.asp?qtest=JS), [JavaTPoint](https://www.javatpoint.com/javascript-quiz).
