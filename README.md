@@ -37,9 +37,21 @@ This quiz will have the following functionality:
 
 * Created boiler plate that will contain a majority of code.
 
-* Added multiple choice questions.
+* Added multiple choice questions into an Array.
 
-* Placeholder comments in DOM order
+* Placeholder comments in DOM order.
+
+* Created Header and set param to space-between.
+
+* Created 'Highscores' and add timer paceholder.
+
+* Created Quiz container that will house the majority of functions. Added flex attributes.
+
+* Created content for quiz Start and set styling attributes.
+
+* PURPLE ~~BEES~~ BUTTONS FOR EVERYONE!!! YOU GET A BUTTON.. YOU GET A BUTTON!!
+![BEES](https://c.tenor.com/cUULOP1a6FIAAAAC/bees-annoying.gif)
+
 
 ## HTML Updates
 
