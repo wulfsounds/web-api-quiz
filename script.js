@@ -223,14 +223,18 @@ const questions = [
 ]
 
 //Creat Variables for quiz
-let cQuestion = 0;
+
+// 'current' Question set at -1. This will allow the quiz to start at Question [0].
+let cQuestion = -1; 
+// Timer variables
 let countdown = 0;
-let score = 0
 let timer;
+// Score Tracking
+let score = 0;
 
 // Function trees go here
 // When 'Start Quiz' is clicked, begin timer and run game.
-function quizBuild() {
+function timerBuild() {
     
     countdown = 50;
     timerContainer.textContent = countdown;
@@ -243,8 +247,48 @@ function quizBuild() {
             gameOver();
         }
     }, 1000)
+    quizStart();
 }
 
+// Create loop for questions
+function quizStart() {
+    // Starts on array[0], question 1
+    cQuestion++;
+    //Once all questions are answered, game over.
+    if (cQuestion > questions.length - 1) {
+        gameOver();
+    }
+
+    // Created variables for cleaner code.
+    let qQuestion = `<h2>${questions[cQuestion].question}</h2>`;
+    let qChoices = questions[cQuestion].choices;
+    let qAnswers = questions[cQuestion].answers; 
+
+    for (let i = 0; i < qAnswers.length; i++) {
+        let choiceBtn = `<button class= [#]>${qAnswers[i]}</button>`;
+        if (qChoices[i] === qAnswers[i]) {
+            choiceBtn = choiceBtn.replace('[#]', 'correct()');
+        } else {
+            choiceBtn = choiceBtn.replace('[#]', 'incorrect()');
+        }
+        qQuestion += choiceBtn;
+    }
+    beginGrab.innerHTML = qQuestion;
+}
+
+function correct() {
+    score += 10;
+    nextQuestion();
+}
+
+function incorrect () {
+    countdown -= 10;
+    nextQuestion();
+}
+
+function nextQuestion() {
+
+}
 
 function displayResults () {
     // when submit button is clicked, results populate.
@@ -254,7 +298,7 @@ function displayResults () {
 // Event Listeners go here
 mainContain.addEventListener('click', function startQuiz() {
     introGrab.setAttribute('style', 'visibility:hidden');
-    quizBuild();
+    timerBuild();
 })
 
 // Executable functions go here

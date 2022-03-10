@@ -58,6 +58,10 @@ This quiz will have the following functionality:
 
 * Built in game functionality.
 
+* Created question loop. This will loop to the next question and notify if answer is correct of incorrect.
+
+* created point structure. 10 points for every correct answer, -10 secs for every incorrect answer.
+
 ## HTML Updates
 
 * Added HTML boiler plate and created div.id containers to house variables.
