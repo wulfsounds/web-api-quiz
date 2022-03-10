@@ -1,97 +1,93 @@
 // Main variables that will contain the program
-const quiz = document.getElementById('quiz');
-const submit = document.getElementById('submit');
-const results = document.getElementById('results');
+// const quiz = document.getElementById('quiz');
+// const submit = document.getElementById('submit');
+// const results = document.getElementById('results');
 
-/* header */
-
-// Create Header and set space between
+// Create Divs Here
 const header = document.createElement('header');
-document.body.append(header);
+const scoreBoard = document.createElement('nav');
+const timerContainer = document.createElement('time');
+const quizMain = document.createElement('main');
+const quizContain = document.createElement('section');
+const quizIntro = document.createElement('article');
+const titleText = document.createElement('h1');
+const quizPara = document.createElement('p');
+const startBtn = document.createElement('button');
+const submitBtn = document.createElement('button');
+const quizBegin = document.createElement('article');
+const questionBox = document.createElement('div');
 
+
+// Set attributes here
+scoreBoard.setAttribute("href", "#highscores");
+scoreBoard.setAttribute('class', 'scoreBoard');
+timerContainer.setAttribute('class','timer');
+quizMain.setAttribute('id', '#quiz');
+quizContain.setAttribute('class', 'quizContainer');
+quizIntro.setAttribute('class', 'quizIntro')
+quizIntro.setAttribute('style', 'visibility:visible;')
+startBtn.setAttribute('id','startBtn');
+startBtn.setAttribute('click', 'startQuiz()');
+submitBtn.setAttribute('click', 'showResults()')
+quizBegin.setAttribute('class', 'quizBegin');
+quizBegin.setAttribute('style', 'visibility:hidden;');
+questionBox.setAttribute('class', 'questionBox');
+questionBox.setAttribute('visibility', 'hidden');
+
+// Append divs here
+document.body.append(header);
+document.body.appendChild(quizMain);
+header.appendChild(scoreBoard);
+header.appendChild(timerContainer);
+quizMain.appendChild(quizContain);
+quizContain.appendChild(quizIntro);
+quizIntro.appendChild(titleText);
+quizIntro.appendChild(quizPara);
+quizIntro.appendChild(startBtn);
+// append submitBtn
+quizContain.appendChild(quizBegin);
+quizBegin.appendChild(questionBox);
+
+// Query Selectors
 const headerStyle = document.querySelector('header');
+const bodySize = document.querySelector('body');
+var mainContain = document.querySelector('main');
+let introGrab = document.querySelector('.quizIntro'); // hides
+let beginGrab = document.querySelector('.quizBegin'); // appears
+const btn = document.querySelectorAll('button');
+// let articleSwitcher = document.querySelectorAll('button'); //not currently needed
+// let grabContainer = document.querySelectorAll('.quizContainer'); // not currently needed
+
+// Set div styles
 headerStyle.style.display = 'flex';
 headerStyle.style.justifyContent = 'space-between';
+bodySize.style.height = '100vh';
+quizMain.style.position = 'relative';
+titleText.style.margin = '0 auto';
+titleText.style.textAlign = 'center';
+quizPara.style.textAlign = "center";
 
-// Create 'Highscores' link
-const scoreBoard = document.createElement('nav');
-scoreBoard.setAttribute("href", "#highscores");
-scoreBoard.textContent = "View Highscores";
-scoreBoard.classList.add('scoreBoard');
-header.appendChild(scoreBoard);
-
-// Create Timer, Countdown on 'onclick'
-const timerContainer = document.createElement('time');
-timerContainer.classList.add('timer');
-timerContainer.textContent = "Timer Placeholder";
-header.appendChild(timerContainer);
-
-/* #quiz */
-
-// Create #quiz container
-const quizMain = document.createElement('main');
-quizMain.setAttribute('id', '#quiz');
-quizMain.style.position = 'fixed';
-quizMain.style.top = '15%';
-quizMain.style.left = '25%';
-document.body.appendChild(quizMain);
-
-// Create #quiz title container, title text
-const quizContain = document.createElement('section');
-quizContain.setAttribute('class', 'quizContainer');
-quizMain.appendChild(quizContain);
-
-// Add flexbox to container and set param
+// Style Objects
 const flexStyle = {
     'display': 'flex',
     'flex-direction': 'column',
     'justify-content': 'center',
     'align-items': 'center',
+    'margin': '0 auto',
     'width': '400px'
 }
 
-Object.assign(quizContain.style, flexStyle);
-
-// Create Articles within the Section tag. This will swap decks thoughout the quiz.
-const quizIntro = document.createElement('article');
-quizIntro.setAttribute('class', 'quizIntro')
-quizIntro.setAttribute('visibility', 'visible');
-quizContain.appendChild(quizIntro);
-
-//Add flexbox to Article and set param
-const introStyle = {
+const quizStyle = {
     'display': 'flex',
     'flex-direction': 'column',
+    'position': 'absolute',
     'justify-content': 'center',
     'align-items': 'center',
+    'margin': '0 auto',
     'width': '400px',
     'visibility': 'visible'
 }
 
-Object.assign(quizIntro.style, flexStyle);
-
-// Create the title and set to h1
-const titleText = document.createElement('h1');
-titleText.textContent = "Coding Quiz Challenge";
-titleText.style.margin = '0 auto'
-titleText.style.textAlign = 'center';
-quizIntro.appendChild(titleText);
-
-// Create #quiz Paragraph
-const quizPara = document.createElement('p');
-quizPara.textContent = "Welcome to the JS Coding Quiz! Click 'Start Quiz' to get started. This timed quiz will provide ten questions each with a score of ten points. Take heed, for every wrong answer, 10 seconds will be subtracted from the clock. Good Luck!"
-quizPara.style.textAlign = "center";
-quizIntro.appendChild(quizPara);
-
-// #quiz startButton, starts timer and quiz appears
-const startBtn = document.createElement('button');
-startBtn.setAttribute('id','startBtn');
-startBtn.setAttribute('onclick', 'startQuiz()');
-startBtn.textContent = 'START QUIZ';
-quizIntro.appendChild(startBtn);
-
-// Button Styling
-const btn = document.querySelectorAll('button');
 const btnStyle = {
     'background-color': '#651AE0',
     'color': '#FFF',
@@ -100,36 +96,26 @@ const btnStyle = {
     'width': '100px',
     'height': '25px'
 }
-// Applies style to all buttons in the DOM
+
+// Style applied to all btn objects
 for (let i = 0; i < btn.length; i++) {
     Object.assign(btn[i].style, btnStyle);
 }
 
-function startQuiz () {
-    // When startButton is pressed, Quiz appears and timer begins.
-    //Add onclick function that will swap visibility between QuizIntro and quizBegin
-    }
+Object.assign(mainContain.style, flexStyle);
+Object.assign(quizContain.style, flexStyle);
+Object.assign(quizIntro.style, flexStyle);
+Object.assign(quizBegin.style, quizStyle)
 
-// Questionnare 
-
-// Create container that will house the questionnaire, Child to section.
-let quizBegin = document.createElement('article');
-quizBegin.setAttribute('class', 'quizBegin');
-quizBegin.setAttribute('visibility', 'hidden');
-quizContain.appendChild(quizBegin);
-
-let questionBox = document.createElement('div');
-questionBox.setAttribute('class', 'questionBox');
-// questionBox.setAttribute('visibility', 'hidden');
-questionBox.addEventListener('click', startQuiz());
-quizBegin.appendChild(questionBox);
-
-
-// Create #question h2. The Questions themselves will populate here
-// Create answer container.
-// Create Multi Choice Buttons [A, B, C, & D]
-    // Button = True, show 'Correct!', points++, next
-    // Button = False, show 'Wrong!', timer--
+scoreBoard.textContent = `View Highscores`;
+timerContainer.textContent = `Timer Placeholder`;
+titleText.textContent = `Coding Quiz Challenge`;
+quizPara.textContent = `Welcome to the JS Coding Quiz! 
+Click 'Start Quiz' to get started. This timed quiz will provide 
+ten questions each with a score of ten points. Take heed, for every 
+wrong answer, 10 seconds will be subtracted from the clock. 
+Good Luck!`
+startBtn.textContent = `START QUIZ`;
 
 // Quiz questions, remins hidden until 'onclick'
 const questions = [
@@ -236,6 +222,180 @@ const questions = [
     }
 ]
 
+//Creat Variables for quiz
+let cQuestion = 0;
+let countdown = 0;
+let score = 0
+let timer;
+
+// Function trees go here
+// When 'Start Quiz' is clicked, begin timer and run game.
+function quizBuild() {
+    
+    countdown = 50;
+    timerContainer.textContent = countdown;
+    // Begin Countdown. When time = 0, clear timer and end game.
+    timer = setInterval(function(){
+        countdown--;
+        timerContainer.textContent = countdown;
+        if (countdown === 0) {
+            clearInterval();
+            gameOver();
+        }
+    }, 1000)
+}
+
+
+function displayResults () {
+    // when submit button is clicked, results populate.
+    // if newGame, then saveResults
+}
+
+// Event Listeners go here
+mainContain.addEventListener('click', function startQuiz() {
+    introGrab.setAttribute('style', 'visibility:hidden');
+    quizBuild();
+})
+
+// Executable functions go here
+
+
+/* header */
+
+// Create Header and set space between
+
+
+
+
+
+
+
+// Create 'Highscores' link
+
+
+
+
+
+
+// Create Timer, Countdown on 'onclick'
+
+
+
+
+
+/* Body */
+
+
+
+/* #quiz */
+
+// Create #quiz container
+
+
+
+
+
+// Create #quiz title container, title text
+
+
+
+
+// Add flexbox to container and set param
+
+
+
+
+
+
+// Create Articles within the Section tag. This will swap decks thoughout the quiz.
+
+
+
+
+
+//Add flexbox to Article and set param
+
+
+
+
+// Create the title and set to h1
+
+
+
+
+
+
+// Create #quiz Paragraph
+
+
+
+
+
+// #quiz startButton, starts timer and quiz appears
+
+
+
+
+
+
+// Button Styling
+
+
+// Applies style to all buttons in the DOM
+
+
+// Event Listener will change visibility to startQuiz
+
+
+// introGrab.addEventListener('click', function startQuiz(e) {
+//     'visibility:hidden;')
+//     console.log(e.target)
+// })
+
+// Create Timer
+// function quizTime() {
+//     var countdownTimer = setInterval(function() {
+//       secondsLeft--;
+
+//       if(secondsLeft === 0) {
+//         // Stops execution of action at set interval
+//         clearInterval(countdownTimer);
+//         // Goes to gameOver screen
+//         // Calls function to create and append image
+//         sendMessage();
+//       }
+//     }, 1000);
+//   }
+
+// Questionnare 
+
+// Create container that will house the questionnaire, Child to section.
+
+
+
+
+
+
+// beginGrab.addEventListener('click', function startQuiz(e) {
+//     'visibility:visible;');
+//     console.log(e.target);
+// })
+
+
+
+
+// questionBox.addEventListener('click', startQuiz());
+
+
+
+// Create #question h2. The Questions themselves will populate here
+// Create answer container.
+// Create Multi Choice Buttons [A, B, C, & D]
+    // Button = True, show 'Correct!', points++, next
+    // Button = False, show 'Wrong!', timer--
+
+
+
 // Gamne Over!
 
 // Create #gameOver 2nd Header
@@ -251,10 +411,7 @@ const questions = [
 /* #results */
 // Create #results 2nd Header 'Highscores'
 // Displays the results
-function displayResults () {
-    // when submit button is clicked, results populate.
-    // if newGame, then saveResults
-}
+
 
 // Create tryAgain button, restarts the quiz, timer and score counter
 

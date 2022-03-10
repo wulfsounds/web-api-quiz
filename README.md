@@ -52,6 +52,11 @@ This quiz will have the following functionality:
 * PURPLE ~~BEES~~ BUTTONS FOR EVERYONE!!! YOU GET A BUTTON.. YOU GET A BUTTON!!
 ![BEES](https://c.tenor.com/cUULOP1a6FIAAAAC/bees-annoying.gif)
 
+* Housecleaning, compartmentalized code into groups for readability and general cleanliness.
+
+* Added event listener to start button. When clicked, begin timer.
+
+* Built in game functionality.
 
 ## HTML Updates
 
