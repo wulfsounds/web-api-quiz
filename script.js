@@ -4,59 +4,78 @@
 // const results = document.getElementById('results');
 
 // Create Divs Here
-const header = document.createElement('header');
-const scoreBoard = document.createElement('nav');
-const timerContainer = document.createElement('time');
-const quizMain = document.createElement('main');
-const quizContain = document.createElement('section');
+//Header
+// const header = document.createElement('header');
+// const scoreBoard = document.createElement('nav');
+// const timerContainer = document.createElement('time');
+
+//grandparent
+// const quizMain = document.createElement('main');
+
+//parent
+// const quizContain = document.createElement('section');
+
+// Child 1
 const quizIntro = document.createElement('article');
 const titleText = document.createElement('h1');
 const quizPara = document.createElement('p');
 const startBtn = document.createElement('button');
-const submitBtn = document.createElement('button');
-const quizBegin = document.createElement('article');
-const questionBox = document.createElement('div');
 
+const submitBtn = document.createElement('button');
+
+//child 2, parent 2
+const quizBox = document.createElement('article');
 
 // Set attributes here
-scoreBoard.setAttribute("href", "#highscores");
+scoreBoard.setAttribute("a", "onclick=sce()");
 scoreBoard.setAttribute('class', 'scoreBoard');
 timerContainer.setAttribute('class','timer');
 quizMain.setAttribute('id', '#quiz');
 quizContain.setAttribute('class', 'quizContainer');
-quizIntro.setAttribute('class', 'quizIntro')
-quizIntro.setAttribute('style', 'visibility:visible;')
+quizIntro.setAttribute('class', 'quizIntro');
+// quizIntro.setAttribute('style', 'visibility:visible;')
 startBtn.setAttribute('id','startBtn');
-startBtn.setAttribute('click', 'startQuiz()');
+startBtn.setAttribute('click', 'quiz()');
 submitBtn.setAttribute('click', 'showResults()')
-quizBegin.setAttribute('class', 'quizBegin');
-quizBegin.setAttribute('style', 'visibility:hidden;');
-questionBox.setAttribute('class', 'questionBox');
-questionBox.setAttribute('visibility', 'hidden');
+quizBox.setAttribute('class', 'quizBox');
+// quizBox.setAttribute('style', 'visibility:hidden;');
+
 
 // Append divs here
+// Header
 document.body.append(header);
-document.body.appendChild(quizMain);
 header.appendChild(scoreBoard);
 header.appendChild(timerContainer);
+
+//grandparent
+document.body.appendChild(quizMain);
+
+//Parent
 quizMain.appendChild(quizContain);
+
+//Child 1
 quizContain.appendChild(quizIntro);
 quizIntro.appendChild(titleText);
 quizIntro.appendChild(quizPara);
 quizIntro.appendChild(startBtn);
 // append submitBtn
-quizContain.appendChild(quizBegin);
-quizBegin.appendChild(questionBox);
+
+// child 2, parent 2
+quizContain.appendChild(quizBox);
+
 
 // Query Selectors
 const headerStyle = document.querySelector('header');
 const bodySize = document.querySelector('body');
 var mainContain = document.querySelector('main');
 let introGrab = document.querySelector('.quizIntro'); // hides
-let beginGrab = document.querySelector('.quizBegin'); // appears
+// let beginGrab = document.querySelector('.quizBox'); // appears
 const btn = document.querySelectorAll('button');
-// let articleSwitcher = document.querySelectorAll('button'); //not currently needed
-// let grabContainer = document.querySelectorAll('.quizContainer'); // not currently needed
+
+const qAll = document.querySelectorAll('.question')
+
+let articleSwitcher = document.querySelectorAll('button'); //not currently needed
+let grabContainer = document.querySelectorAll('.quizContainer'); // not currently needed
 
 // Set div styles
 headerStyle.style.display = 'flex';
@@ -80,7 +99,7 @@ const flexStyle = {
 const quizStyle = {
     'display': 'flex',
     'flex-direction': 'column',
-    'position': 'absolute',
+    'position': 'relative',
     'justify-content': 'center',
     'align-items': 'center',
     'margin': '0 auto',
@@ -105,7 +124,7 @@ for (let i = 0; i < btn.length; i++) {
 Object.assign(mainContain.style, flexStyle);
 Object.assign(quizContain.style, flexStyle);
 Object.assign(quizIntro.style, flexStyle);
-Object.assign(quizBegin.style, quizStyle)
+Object.assign(quizBox.style, quizStyle)
 
 scoreBoard.textContent = `View Highscores`;
 timerContainer.textContent = `Timer Placeholder`;
@@ -118,108 +137,33 @@ Good Luck!`
 startBtn.textContent = `START QUIZ`;
 
 // Quiz questions, remins hidden until 'onclick'
-const questions = [
+let questions = [
     {
         // See README for cited sources
         question: "Inside which HTML element do we put the JavaScript?",
-        answers: {
-            A: "<js>",
-            B: "<scripting>",
-            C: "<script>",
-            D: "<javascript>"
-        },
-        correctAnswer: "C"
+        answers: ["<js>", "<scripting>", "<script>", "<javascript>"],
+        answer: "<script>"
     },
     {
         question: "How do you create an expressive function?",
-        answers: {
-            A: "var varName = function myFunc()",
-            B: "function = myFunc()",
-            C: "function:myFunc()",
-            D: "function myFunc()"
-        },
-        correctAnswer: "A"
+        guesses: ["var varName = function myFunc()", "function = myFunc()", "function:myFunc()", "function myFunc()"],
+        answer: "var varName = function myFunc()"
     },
     {
         question: "Which of these statements are truthy?",
-        answers: {
-            A: "if (varName === true) {return true;}",
-            B: "if (!varName == false) {return false;}",
-            C: "if (varName == true) {return false;}",
-            D: "if (varName) {return true;}"
-        },
-        correctAnswer: "D"
+        guesses: ["if (varName === true) {return true;}", "if (!varName == false) {return false;}", "if (varName == true) {return false;}", "if (varName) {return true;}"],
+        answer: "if (varName) {return true;}"
     },
     {
         question: "What is the correct way to write a JavaScript array?",
-        answer: {
-            A: "var colors = 'red', 'green', 'blue'",
-            B: "var colors('red', 'green', 'blue')",
-            C: "var colors = ['red', 'green', 'blue']",
-            D: "var colors = rgb()"
-        },
-        correctAnswer: "C"
+        guesses: ["var colors = 'red', 'green', 'blue'", "var colors('red', 'green', 'blue')", "var colors = ['red', 'green', 'blue']", "var colors = rgb()"],
+        answer: "var colors = ['red', 'green', 'blue']"
     },
     {
         question: "Which one of thses is more than just a mathmatic operator?",
-        answers: {
-            A: "+",
-            B: "=",
-            C: "%",
-            D: "*"
-        },
-        correctAnswer: "B"
+        guesses: ["+", "=", "%", "*"],
+        answer: "="
     },
-    {
-        question: "What is the output of console.log(typeof true)?",
-        answers: {
-            A: "string",
-            B: "number",
-            C: "undefined",
-            D: "boolean"
-        },
-        correctAnswer: "D"
-    },
-    {
-        question: "In which instance whould 'this' be called?",
-        answers: {
-            A: "When using a global variable",
-            B: "Inside a function",
-            C: "When using an array",
-            D: "After calling a declaritive function"
-        },
-        correctAnswer: "B"
-    },
-    {
-        question: "How is a 'for' loop written?",
-        answers: {
-            A: "for (i > varName; i++) {}",
-            B: "for (i = 0, i < varName, i++)",
-            C: "for (i++; var i < 10)",
-            D: "for (var i = 0; i < 10; i++) {}"
-        },
-        correctAnswer: "D"
-    },
-    {
-        question: "Which one of these are true?",
-        answers: {
-            A: "(12 === '12')",
-            B: "(5 == '5')",
-            C: "(a === b)",
-            D: "None of the above"
-        },
-        correctAnswer: "B"
-    },
-    {
-        question: "Which dot notation method would be used to insert an object at the beginning of an existing array?",
-        answers: {
-            A: ".splice()",
-            B: ".push()",
-            C: ".unshift()",
-            D: ".insert()"
-        },
-        correctAnswer: "C"
-    }
 ]
 
 //Creat Variables for quiz
@@ -234,46 +178,47 @@ let score = 0;
 
 // Function trees go here
 // When 'Start Quiz' is clicked, begin timer and run game.
-function timerBuild() {
+function startQuiz(e) {
     
-    countdown = 50;
-    timerContainer.textContent = countdown;
+    countdown = 30;
+    timerContainer.innerHTML = countdown;
     // Begin Countdown. When time = 0, clear timer and end game.
     timer = setInterval(function(){
         countdown--;
-        timerContainer.textContent = countdown;
-        if (countdown === 0) {
-            clearInterval();
+        timerContainer.innerHTML = countdown;
+        if (countdown <= 0) {
+            clearInterval(timer);
             gameOver();
         }
-    }, 1000)
-    quizStart();
+    }, 1000);
+    nextQuestion();
 }
 
 // Create loop for questions
-function quizStart() {
+function nextQuestion() {
     // Starts on array[0], question 1
     cQuestion++;
     //Once all questions are answered, game over.
     if (cQuestion > questions.length - 1) {
         gameOver();
+        return;
     }
 
-    // Created variables for cleaner code.
-    let qQuestion = `<h2>${questions[cQuestion].question}</h2>`;
-    let qChoices = questions[cQuestion].choices;
-    let qAnswers = questions[cQuestion].answers; 
+    // Header Question
+    let qHeader = `<h2>${questions[cQuestion].question}</h2>`;
 
-    for (let i = 0; i < qAnswers.length; i++) {
-        let choiceBtn = `<button class= [#]>${qAnswers[i]}</button>`;
-        if (qChoices[i] === qAnswers[i]) {
-            choiceBtn = choiceBtn.replace('[#]', 'correct()');
+    for (let i = 0; i < questions[cQuestion].guesses?.length; i++) {
+        let choiceBtn = "<button onclick=\"[#]\">[answer]</button>";
+        choiceBtn = choiceBtn.replace("[answer]", questions[cQuestion].guesses[i]);
+        if (questions[cQuestion].guesses[i] == questions[cQuestion].answer) {
+            choiceBtn = choiceBtn.replace("[#]", "correct()");
         } else {
-            choiceBtn = choiceBtn.replace('[#]', 'incorrect()');
+            choiceBtn = choiceBtn.replace("[#]", "incorrect()");
         }
-        qQuestion += choiceBtn;
-    }
-    beginGrab.innerHTML = qQuestion;
+        qHeader += choiceBtn;
+      
+    }  
+    quizBox.innerHTML = qHeader;
 }
 
 function correct() {
@@ -286,8 +231,16 @@ function incorrect () {
     nextQuestion();
 }
 
-function nextQuestion() {
+function gameOver() {
+    clearInterval(timer);
 
+    var quizEnd = `<h2>Time's Up!</h2>
+                    <h3>Score: ${score} out of 100
+                    <input type='text' class='name' placeholder='Initials'>
+                    <button id='submitBtn'>SUBMIT</button>`;
+    
+    quizBox.innerHTML = quizEnd;
+                    
 }
 
 function displayResults () {
@@ -296,10 +249,13 @@ function displayResults () {
 }
 
 // Event Listeners go here
-mainContain.addEventListener('click', function startQuiz() {
+mainContain.addEventListener('click', function quiz() {
     introGrab.setAttribute('style', 'visibility:hidden');
-    timerBuild();
+    // quizBox.setAttribute('style', 'visibility:visible')
+    startQuiz();
 })
+
+// Create quiz(). this will house the entire test
 
 // Executable functions go here
 
