@@ -46,6 +46,7 @@ const startBtn = document.querySelector("#startBtn");
 const quiz = document.querySelector(".quiz");
 const quizBox = document.querySelector(".quizbox");
 const answerBox = document.querySelector(".answerBox");
+const ulList = document.createElement("ul")
 
 //Group three
 const results = document.querySelector(".results");
@@ -68,22 +69,11 @@ startBtn.addEventListener("click", function (){
     startQuiz(qIndex);
 })
 
-//This function takes any .group and flips visibility.. S/O to Vidal!
-// function setChange(tag){
-//     let divGroup = document.querySelectorAll(".group");
-//     divGroup.forEach(item => {
-//         if (item.className === (tag+" block")) {
-//             item.style.visibility = "visible";
-//         } else {
-//             item.style.visibility = "hidden";
-//         }
-//     })
-// }
-
 // Screen change to show Quiz. Declaring qIndex as argument to filter through multiple questions in an array.
 function startQuiz(qIndex) {
     // Clear intro from screen
     intro.innerHTML = "";
+    // ulCreate.innerHTML = ""; //rework
     // Call variables to run through loops
     let currentQ = quizItems[qIndex].question;
     let userInput = quizItems[qIndex].choices;
@@ -92,22 +82,63 @@ function startQuiz(qIndex) {
         quiz.innerHTML = currentQ;
     }
 
-    userInput.forEach(function (){
+    //Writes and commits Answers to .answerBox
+    userInput.forEach(function (inputItem){
+        let answerDump = document.createElement("li");
+        answerDump.textContent = inputItem;
+        answerBox.appendChild(ulList)
+        ulList.appendChild(answerDump);
+        answerDump.addEventListener("click", nextQuestion())
         
     })
-
-
 }
 
-
-function find(needle, haystack) {
-    var results = [];
-    var idx = haystack.indexOf(needle);
-    while (idx != -1) {
-        results.push(idx);
-        idx = haystack.indexOf(needle, idx + 1);
+function nextQuestion() {
+    // Starts on array[0], question 1
+    qIndex++;
+    //Once all questions are answered, game over.
+    if (qIndex > quizItems.length - 1) {
+        gameOver();
+        return;
     }
-    return results;
+
+    // Header Question
+    let qHeader = document.querySelector(".question-head");
+
+    for (let i = 0; i < quizItems[qIndex].choices.length; i++) {
+        let choiceBtn = "<button onclick=\"[#]\">[answer]</button>";
+        choiceBtn = choiceBtn.replace("[answer]", quizItems[qIndex].choices[i]);
+        if (quizItems[qIndex].choices[i] == quizItems[qIndex].answer) {
+            choiceBtn = choiceBtn.replace("[#]", "correct()");
+        } else {
+            choiceBtn = choiceBtn.replace("[#]", "incorrect()");
+        }
+        qHeader += choiceBtn;
+      
+    }  
+    quizBox.innerHTML = qHeader;
+}
+
+function correct() {
+    score += 10;
+    nextQuestion();
+}
+
+function incorrect () {
+    seconds -= 10;
+    nextQuestion();
+}
+
+function gameOver() {
+    clearInterval(timer);
+
+    var quizEnd = `<h2>GAME OVER</h2>
+                    <h3>Score: ${score} out of 100
+                    <input type='text' class='name' placeholder='Initials'>
+                    <button id='submitBtn'>SUBMIT</button>`;
+    
+    quizBox.innerHTML = quizEnd;
+                    
 }
 
 
