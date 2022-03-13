@@ -116,7 +116,7 @@ function nextQuestion() {
         qHeader += choiceBtn;
       
     }  
-    quizBox.innerHTML = qHeader;
+    quizBox.textContent = qHeader; // rework
 }
 
 function correct() {

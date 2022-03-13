@@ -72,15 +72,19 @@ This quiz will have the following functionality:
 
 ## Troubleshooting
 
-...
+* An issue where the questions would not appear after click.
 
 ## ScreenShots
 
-...
+![web-quiz-screenshot1](./Assets/Images/web-quiz-screenshot1.jpg)
+
+![web-quiz-screenshot2](./Assets/Images/web-quiz-screenshot2.jpg)
 
 ## Links
 
-...
+[GitHub Repo](https://github.com/wulfsounds/web-api-quiz)
+
+[GitHub Page](https://wulfsounds.github.io/web-api-quiz/)
 
 ## Sources
 
